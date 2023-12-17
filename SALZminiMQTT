@@ -1,5 +1,272 @@
 [
     {
+        "id": "a78a22d659b0315d",
+        "type": "mqtt in",
+        "z": "93195d33d7c4720b",
+        "name": "",
+        "topic": "SALZminiMQTT/WN",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "3481ac2d82fdd088",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 130,
+        "y": 360,
+        "wires": [
+            [
+                "850229115b085da2"
+            ]
+        ]
+    },
+    {
+        "id": "77a34313e8ae6a06",
+        "type": "comment",
+        "z": "93195d33d7c4720b",
+        "name": "WNxx：今すぐ水やり",
+        "info": "",
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 140,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "8b1183f749d084a5",
+        "type": "comment",
+        "z": "93195d33d7c4720b",
+        "name": "SL30 :水やりレベル設定（初期値:30）",
+        "info": "",
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 190,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "356b8f6362408eac",
+        "type": "change",
+        "z": "93195d33d7c4720b",
+        "name": "flow.WLにセット",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "WL",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 550,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fa6e143366d1a939",
+        "type": "debug",
+        "z": "93195d33d7c4720b",
+        "name": "ポンプON",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 410,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "c82bf629c57b8c34",
+        "type": "mcu_digital_out",
+        "z": "93195d33d7c4720b",
+        "name": "ポンプON",
+        "pin": "26",
+        "mode": "Output",
+        "initial": "undefined",
+        "invert": false,
+        "moddable_manifest": {
+            "include": "$(NODEREDMCU)/nodes/mcu/digital/manifest.json"
+        },
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 550,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "7c8dfe373ec2381d",
+        "type": "delay",
+        "z": "93195d33d7c4720b",
+        "name": "指定秒待つ",
+        "pauseType": "delayv",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 730,
+        "y": 400,
+        "wires": [
+            [
+                "3a529233cc276ce6",
+                "ad76a3dbccb60e1b",
+                "3dd33c839b1b45cd"
+            ]
+        ]
+    },
+    {
+        "id": "b8576a993d2f74d2",
+        "type": "change",
+        "z": "93195d33d7c4720b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 560,
+        "y": 400,
+        "wires": [
+            [
+                "7c8dfe373ec2381d"
+            ]
+        ]
+    },
+    {
+        "id": "2d0677fa4b3a0888",
+        "type": "mcu_digital_out",
+        "z": "93195d33d7c4720b",
+        "name": "ポンプOFF",
+        "pin": "26",
+        "mode": "Output",
+        "initial": "undefined",
+        "invert": false,
+        "moddable_manifest": {
+            "include": "$(NODEREDMCU)/nodes/mcu/digital/manifest.json"
+        },
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 1090,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "4e50af7e8fca80d6",
+        "type": "inject",
+        "z": "93195d33d7c4720b",
+        "name": "10秒ごとに",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 110,
+        "y": 120,
+        "wires": [
+            [
+                "7aab3ca15f80b86f"
+            ]
+        ]
+    },
+    {
+        "id": "6519a9d7a4cc38ec",
+        "type": "random",
+        "z": "93195d33d7c4720b",
+        "name": "ダミー水分計",
+        "low": "0.461",
+        "high": "0.625",
+        "inte": "false",
+        "property": "payload",
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 300,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7aab3ca15f80b86f",
+        "type": "mcu_analog",
+        "z": "93195d33d7c4720b",
+        "name": "水分計の値を読む",
+        "pin": "32",
+        "resolution": "",
+        "moddable_manifest": {
+            "include": "$(NODEREDMCU)/nodes/mcu/analog/manifest.json"
+        },
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 310,
+        "y": 120,
+        "wires": [
+            [
+                "b6599fc42c7f149b"
+            ]
+        ]
+    },
+    {
         "id": "b6599fc42c7f149b",
         "type": "function",
         "z": "93195d33d7c4720b",
@@ -23,5 +290,692 @@
                 "bbcdda4c77bc42a9"
             ]
         ]
+    },
+    {
+        "id": "a3d0d95b8cf2aae1",
+        "type": "debug",
+        "z": "93195d33d7c4720b",
+        "name": "WL:水分量％",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 830,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "3f3f2aaad655ecd8",
+        "type": "mqtt out",
+        "z": "93195d33d7c4720b",
+        "name": "",
+        "topic": "SALZminiMQTT/WL",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3481ac2d82fdd088",
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 860,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "fbacc2c86b092177",
+        "type": "mcu_neopixels",
+        "z": "93195d33d7c4720b",
+        "name": "",
+        "pin": "",
+        "length": "",
+        "order": "RGB",
+        "mode": "2",
+        "background": "#000000",
+        "foreground": "#ff0000",
+        "wipe": "40",
+        "brightness": "18",
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 540,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "7475be53277fd452",
+        "type": "change",
+        "z": "93195d33d7c4720b",
+        "name": "#005500",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "#005500",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 400,
+        "y": 360,
+        "wires": [
+            [
+                "fbacc2c86b092177"
+            ]
+        ]
+    },
+    {
+        "id": "1be4d13defb6082b",
+        "type": "mcu_neopixels",
+        "z": "93195d33d7c4720b",
+        "name": "",
+        "pin": "",
+        "length": "",
+        "order": "RGB",
+        "mode": "2",
+        "background": "#000000",
+        "foreground": "#ff0000",
+        "wipe": "40",
+        "brightness": "18",
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 1080,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "3a529233cc276ce6",
+        "type": "change",
+        "z": "93195d33d7c4720b",
+        "name": "#000000",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "#000000",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 940,
+        "y": 440,
+        "wires": [
+            [
+                "1be4d13defb6082b"
+            ]
+        ]
+    },
+    {
+        "id": "65cb5358215a4706",
+        "type": "inject",
+        "z": "93195d33d7c4720b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "9",
+        "payloadType": "str",
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 170,
+        "y": 400,
+        "wires": [
+            [
+                "850229115b085da2"
+            ]
+        ]
+    },
+    {
+        "id": "905ac1f0046f4797",
+        "type": "function",
+        "z": "93195d33d7c4720b",
+        "name": "秒に変換",
+        "func": "msg.payload = msg.payload * 1000;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 400,
+        "y": 400,
+        "wires": [
+            [
+                "b8576a993d2f74d2"
+            ]
+        ]
+    },
+    {
+        "id": "ba387de37a817df1",
+        "type": "mqtt in",
+        "z": "93195d33d7c4720b",
+        "name": "",
+        "topic": "SALZminiMQTT/SL",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "3481ac2d82fdd088",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 130,
+        "y": 640,
+        "wires": [
+            [
+                "c9e368f9b70991ae"
+            ]
+        ]
+    },
+    {
+        "id": "a2fd0d9a49f6d3ef",
+        "type": "inject",
+        "z": "93195d33d7c4720b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "30",
+        "payloadType": "str",
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 170,
+        "y": 680,
+        "wires": [
+            [
+                "53547506fce5e0ed"
+            ]
+        ]
+    },
+    {
+        "id": "622cb5d3166cc9c1",
+        "type": "mcu_neopixels",
+        "z": "93195d33d7c4720b",
+        "name": "",
+        "pin": "",
+        "length": "",
+        "order": "RGB",
+        "mode": "2",
+        "background": "#000000",
+        "foreground": "#ff0000",
+        "wipe": "40",
+        "brightness": "18",
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 660,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "6aa6e4f8654f3887",
+        "type": "change",
+        "z": "93195d33d7c4720b",
+        "name": "#000055",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "#000055",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 520,
+        "y": 640,
+        "wires": [
+            [
+                "622cb5d3166cc9c1"
+            ]
+        ]
+    },
+    {
+        "id": "9edebd53653731dd",
+        "type": "delay",
+        "z": "93195d33d7c4720b",
+        "name": "1秒待つ",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 520,
+        "y": 680,
+        "wires": [
+            [
+                "7294227c5b4df311"
+            ]
+        ]
+    },
+    {
+        "id": "c4583788c37b702e",
+        "type": "mcu_neopixels",
+        "z": "93195d33d7c4720b",
+        "name": "",
+        "pin": "",
+        "length": "",
+        "order": "RGB",
+        "mode": "2",
+        "background": "#000000",
+        "foreground": "#ff0000",
+        "wipe": "40",
+        "brightness": "18",
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 800,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "7294227c5b4df311",
+        "type": "change",
+        "z": "93195d33d7c4720b",
+        "name": "#000000",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "#000000",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 660,
+        "y": 680,
+        "wires": [
+            [
+                "c4583788c37b702e"
+            ]
+        ]
+    },
+    {
+        "id": "4dc90f72c5f12223",
+        "type": "function",
+        "z": "93195d33d7c4720b",
+        "name": "変数の初期化",
+        "func": "",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// ここに記述したコードは、ノードをデプロイした時に\n// 一度だけ実行されます。\n\nflow.set('WL', 30);\n",
+        "finalize": "",
+        "libs": [],
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 120,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c9e368f9b70991ae",
+        "type": "rbe",
+        "z": "93195d33d7c4720b",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 290,
+        "y": 640,
+        "wires": [
+            [
+                "53547506fce5e0ed"
+            ]
+        ]
+    },
+    {
+        "id": "bbcdda4c77bc42a9",
+        "type": "switch",
+        "z": "93195d33d7c4720b",
+        "name": "乾いているか？",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lt",
+                "v": "WL",
+                "vt": "flow"
+            },
+            {
+                "t": "gte",
+                "v": "WL",
+                "vt": "flow"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 840,
+        "y": 180,
+        "wires": [
+            [
+                "28f94d21aed60fdc"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "28f94d21aed60fdc",
+        "type": "template",
+        "z": "93195d33d7c4720b",
+        "name": "9",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "9",
+        "output": "str",
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 990,
+        "y": 180,
+        "wires": [
+            [
+                "850229115b085da2"
+            ]
+        ]
+    },
+    {
+        "id": "ad76a3dbccb60e1b",
+        "type": "debug",
+        "z": "93195d33d7c4720b",
+        "name": "ポンプOFF",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 950,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "63ce3d1bdf107cfc",
+        "type": "mqtt out",
+        "z": "93195d33d7c4720b",
+        "name": "",
+        "topic": "SALZminiMQTT/PS",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3481ac2d82fdd088",
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 570,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "f91635067607f3c0",
+        "type": "mqtt out",
+        "z": "93195d33d7c4720b",
+        "name": "",
+        "topic": "SALZminiMQTT/PS",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3481ac2d82fdd088",
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 1110,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "cafe2e63f00ce308",
+        "type": "comment",
+        "z": "93195d33d7c4720b",
+        "name": "ポート番号:26",
+        "info": "",
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 370,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "a9ba973743bec053",
+        "type": "comment",
+        "z": "93195d33d7c4720b",
+        "name": "ポート番号:32",
+        "info": "",
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 290,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "72131128dd4dd99d",
+        "type": "template",
+        "z": "93195d33d7c4720b",
+        "name": "1",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "1",
+        "output": "str",
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 390,
+        "y": 320,
+        "wires": [
+            [
+                "c82bf629c57b8c34",
+                "63ce3d1bdf107cfc"
+            ]
+        ]
+    },
+    {
+        "id": "3dd33c839b1b45cd",
+        "type": "template",
+        "z": "93195d33d7c4720b",
+        "name": "0",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "0",
+        "output": "str",
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 930,
+        "y": 400,
+        "wires": [
+            [
+                "f91635067607f3c0",
+                "2d0677fa4b3a0888"
+            ]
+        ]
+    },
+    {
+        "id": "850229115b085da2",
+        "type": "junction",
+        "z": "93195d33d7c4720b",
+        "x": 280,
+        "y": 360,
+        "wires": [
+            [
+                "7475be53277fd452",
+                "905ac1f0046f4797",
+                "fa6e143366d1a939",
+                "72131128dd4dd99d"
+            ]
+        ]
+    },
+    {
+        "id": "53547506fce5e0ed",
+        "type": "junction",
+        "z": "93195d33d7c4720b",
+        "x": 400,
+        "y": 660,
+        "wires": [
+            [
+                "356b8f6362408eac",
+                "6aa6e4f8654f3887",
+                "9edebd53653731dd"
+            ]
+        ]
+    },
+    {
+        "id": "c985c54c0974d093",
+        "type": "junction",
+        "z": "93195d33d7c4720b",
+        "x": 460,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3481ac2d82fdd088",
+        "type": "mqtt-broker",
+        "name": "192.168.XXX.XXX:1880",
+        "broker": "192.168.XXX.XXX",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": "",
+        "_mcu": {
+            "mcu": false
+        }
     }
 ]
