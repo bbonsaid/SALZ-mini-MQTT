@@ -1,0 +1,27 @@
+[
+    {
+        "id": "b6599fc42c7f149b",
+        "type": "function",
+        "z": "93195d33d7c4720b",
+        "name": "変換",
+        "func": "//水に浸したとき：0.461\n//乾いているとき：0.625\n\nvar wl = msg.payload;\n\nvar wetWl = 0.461;\nvar dryWl = 0.625;\n\nmsg.payload = Math.round((1.0 - ((wl - wetWl) / (dryWl - wetWl))) * 100.0);\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "_mcu": {
+            "mcu": true
+        },
+        "x": 490,
+        "y": 120,
+        "wires": [
+            [
+                "3f3f2aaad655ecd8",
+                "a3d0d95b8cf2aae1",
+                "bbcdda4c77bc42a9"
+            ]
+        ]
+    }
+]
